@@ -3,10 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/ferin/AppData/Local/Android/Sdk/platforms/android-32/data/res/layout/simple_list_item_1.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/ferin/StudioProjects/PracticeApp/app/src/main/res/layout/activity_grid_view.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/ferin/StudioProjects/PracticeApp/app/src/main/res/layout/activity_list_view.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/ferin/StudioProjects/PracticeApp/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/ferin/StudioProjects/PracticeApp/app/src/main/res/layout/activity_main2.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/ferin/StudioProjects/PracticeApp/app/src/main/res/layout/activity_web_view.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/ferin/StudioProjects/PracticeApp/app/src/main/res/layout/custom_dialog.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/ferin/StudioProjects/PracticeApp/app/src/main/res/layout/list_item.xml" value="0.253125" />
         <entry key="..\:/Users/ferin/StudioProjects/PracticeApp/app/src/main/res/menu/main_menu.xml" value="0.25416666666666665" />
       </map>
     </option>

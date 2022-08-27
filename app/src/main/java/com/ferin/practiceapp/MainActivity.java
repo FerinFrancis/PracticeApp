@@ -2,30 +2,39 @@ package com.ferin.practiceapp;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.databinding.DataBindingUtil;
 
+import android.Manifest;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
+import android.telephony.SmsManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.MediaController;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 import android.widget.VideoView;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
@@ -57,6 +66,18 @@ public class MainActivity extends AppCompatActivity {
     VideoView videoViewMp4Var;
     Button videoButtonWebMp4Var;
 
+    Spinner spinnerVar;
+    TextView spinnerTextViewVar;
+
+    Button goToListViewButtonVar;
+
+    Button goToGridViewButtonVar;
+
+    TextView smsTextViewVar;
+    EditText enterSmsNumVar;
+    EditText enterSmsMessageVar;
+    Button sendSmsButtonVar;
+
 
     // Classes
     AlertDialog.Builder alertDialog;
@@ -64,9 +85,15 @@ public class MainActivity extends AppCompatActivity {
     DatePickerDialog datePickerDialog;
     TimePickerDialog timePickerDialog;
     MediaPlayer mediaPlayer;
+    ArrayList spinnerArrayList;
+    ArrayAdapter spinnerArrayAdapter;
+    SmsManager smsManager;
 
     // String
     String enterTextString,enterIntentString;
+    String smsMobileString;
+    String smsMessageString;
+
 
 
     @Override
@@ -99,6 +126,18 @@ public class MainActivity extends AppCompatActivity {
 
         videoViewMp4Var = findViewById(R.id.videoViewWebMp4);
         videoButtonWebMp4Var = findViewById(R.id.videoViewWebMp4Button);
+
+        spinnerVar = findViewById(R.id.spinner);
+        spinnerTextViewVar = findViewById(R.id.spinnerTextView);
+
+        goToListViewButtonVar = findViewById(R.id.listViewButton);
+
+        goToGridViewButtonVar = findViewById(R.id.gridViewButton);
+
+        smsTextViewVar = findViewById(R.id.smsTextView);
+        enterSmsNumVar = findViewById(R.id.enterSmsDestNumber);
+        enterSmsMessageVar = findViewById(R.id.enterSmsMessage);
+        sendSmsButtonVar = findViewById(R.id.smsSendButton);
 
 
         // Edit Text to display in TextView
@@ -238,6 +277,76 @@ public class MainActivity extends AppCompatActivity {
                 videoViewMp4Var.start();
             }
         });
+
+        spinnerArrayList = new ArrayList();
+        spinnerArrayList.add("Select an option");
+        spinnerArrayList.add("One");
+        spinnerArrayList.add("Two");
+        spinnerArrayList.add("Three");
+        spinnerArrayList.add("Four");
+        spinnerArrayList.add("Five");
+        spinnerArrayList.add("Six");
+
+        spinnerArrayAdapter = new ArrayAdapter(this, R.layout.list_item,spinnerArrayList);
+        spinnerVar.setAdapter(spinnerArrayAdapter);
+
+        spinnerVar.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if(i>0){
+                    String spinnerData = spinnerVar.getSelectedItem().toString();
+                    spinnerTextViewVar.setText("Selected option is: "+spinnerData);
+                }
+                else{
+                    spinnerTextViewVar.setText(R.string.selected_option_from_spinner_will_be_displayed);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        goToListViewButtonVar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this,ListView.class);
+                startActivity(intent);
+            }
+        });
+
+        goToGridViewButtonVar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, GridView.class);
+                startActivity(intent);
+            }
+        });
+
+
+        sendSmsButtonVar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                smsMobileString = enterSmsNumVar.getText().toString();
+                smsMessageString = enterSmsMessageVar.getText().toString();
+
+                // Code to check if permission is granted already
+                if (ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED)
+                {
+                    // If now permission granted, open SMS runtime permission box
+                    ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.SEND_SMS},1);
+                }
+                else{
+                    // If permission already granted, shows this toast
+                    Toast.makeText(MainActivity.this, "SMS permission already granted", Toast.LENGTH_SHORT).show();
+                }
+
+                smsManager = SmsManager.getDefault();
+                smsManager.sendTextMessage(smsMobileString,null,smsMessageString,null,null);
+            }
+        });
+
     }
 
 

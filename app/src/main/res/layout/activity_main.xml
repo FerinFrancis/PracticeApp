@@ -177,9 +177,70 @@
                 android:layout_gravity="center"
                 android:text="VideoView Button Web MP4" />
 
+            <Spinner
+                android:id="@+id/spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_weight="1"
+                android:layout_gravity="center" />
+
+
+            <TextView
+                android:id="@+id/spinnerTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:hint="@string/selected_option_from_spinner_will_be_displayed"/>
+
+            <Button
+                android:id="@+id/listViewButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_gravity="center"
+                android:text="Go to ListView" />
+
+            <Button
+                android:id="@+id/gridViewButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Go to GridView" />
+
+
+            <TextView
+                android:id="@+id/smsTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="SMS Sample" />
+
+            <EditText
+                android:id="@+id/enterSmsDestNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="phone"
+                android:hint="Enter Mobile Number" />
+
+            <EditText
+                android:id="@+id/enterSmsMessage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dp"
+                android:inputType="textPersonName"
+                android:hint="Enter Message" />
+
+            <Button
+                android:id="@+id/smsSendButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Send SMS" />
+
         </LinearLayout>
 
     </ScrollView>
-
 
 </LinearLayout>
